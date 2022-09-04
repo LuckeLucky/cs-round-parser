@@ -31,3 +31,14 @@ func (analyser *Analyser) setRoundFinish() {
 	analyser.previousRound = analyser.currentRound
 	analyser.currentRound = nil
 }
+
+func (analyser *Analyser) setSpectators() {
+	for _, participant := range analyser.parser.GameState().Participants().Connected() {
+		//1 corresponds to team Spectators
+		if participant.Team == 1 {
+			if _, ok := analyser.spectators[participant.SteamID64]; !ok {
+				analyser.spectators[participant.SteamID64] = participant.Name
+			}
+		}
+	}
+}

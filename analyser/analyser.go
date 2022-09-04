@@ -40,6 +40,9 @@ type Analyser struct {
 	currentOvertimeStartMoney int
 	overtimeMaxRounds         int
 	freeArmor                 int
+
+	//participants
+	spectators map[uint64]string
 }
 
 func NewAnalyser(demostream io.Reader) *Analyser {
@@ -59,7 +62,6 @@ func NewAnalyser(demostream io.Reader) *Analyser {
 }
 
 func (analyser *Analyser) handleHeader() {
-
 	header, err := analyser.parser.ParseHeader()
 	utils.CheckError(err)
 	analyser.mapName = header.MapName
@@ -72,6 +74,7 @@ func (analyser *Analyser) FirstParse() {
 
 	analyser.registerNetMessageHandlers()
 	analyser.registerMatchEventHandlers()
+	analyser.registerPlayerEventHandlers()
 
 	// Parse to end
 	err := analyser.parser.ParseToEnd()
@@ -82,4 +85,5 @@ func (analyser *Analyser) FirstParse() {
 	analyser.printHalfs()
 	analyser.printMap()
 	analyser.printRoundsPlayed()
+	analyser.printSpectators()
 }

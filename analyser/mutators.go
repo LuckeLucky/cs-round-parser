@@ -4,6 +4,7 @@ func (analyser *Analyser) setDefault() {
 	analyser.overtimeMaxRounds = 6
 	analyser.freeArmor = 0
 	analyser.matchEnded = false
+	analyser.spectators = make(map[uint64]string)
 }
 
 func (analyser *Analyser) resetHalfScores() {

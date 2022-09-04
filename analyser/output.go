@@ -69,3 +69,10 @@ func (analyser *Analyser) printScore() {
 		fmt.Printf("%s vs %s  %d : %d\n", color.BlueString(ctName), color.RedString(tName), analyser.ctScore, analyser.tScore)
 	}
 }
+
+func (analyser *Analyser) printSpectators() {
+	fmt.Println("Spectators:")
+	for steamID, name := range analyser.spectators {
+		fmt.Printf("https://steamcommunity.com/profiles/%d (%s)\n", steamID, name)
+	}
+}
