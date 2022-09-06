@@ -75,7 +75,6 @@ func (analyser *Analyser) FirstParse() {
 
 	analyser.registerNetMessageHandlers()
 	analyser.registerMatchEventHandlers()
-	analyser.registerPlayerEventHandlers()
 
 	// Parse to end
 	err := analyser.parser.ParseToEnd()

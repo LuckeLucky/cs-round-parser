@@ -39,12 +39,3 @@ func (analyser *Analyser) registerMatchEventHandlers() {
 	//Handle side switch
 	analyser.parser.RegisterEventHandler(func(e events.TeamSideSwitch) { analyser.handlerSideSwitch() })
 }
-
-func (analyser *Analyser) registerPlayerEventHandlers() {
-	analyser.parser.RegisterEventHandler(func(e events.BombPlantBegin) {
-		if !analyser.roundStarted {
-			return
-		}
-		analyser.setParticipants()
-	})
-}
