@@ -45,6 +45,6 @@ func (analyser *Analyser) registerPlayerEventHandlers() {
 		if !analyser.roundStarted {
 			return
 		}
-		analyser.setSpectators()
+		analyser.setParticipants()
 	})
 }

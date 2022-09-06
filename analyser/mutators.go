@@ -5,6 +5,7 @@ func (analyser *Analyser) setDefault() {
 	analyser.freeArmor = 0
 	analyser.matchEnded = false
 	analyser.spectators = make(map[uint64]string)
+	analyser.players = make(map[string]map[uint64]string)
 }
 
 func (analyser *Analyser) resetHalfScores() {

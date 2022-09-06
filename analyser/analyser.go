@@ -43,6 +43,7 @@ type Analyser struct {
 
 	//participants
 	spectators map[uint64]string
+	players    map[string](map[uint64]string)
 }
 
 func NewAnalyser(demostream io.Reader) *Analyser {
@@ -85,5 +86,6 @@ func (analyser *Analyser) FirstParse() {
 	analyser.printHalfs()
 	analyser.printMap()
 	analyser.printRoundsPlayed()
+	analyser.printPlayers()
 	analyser.printSpectators()
 }

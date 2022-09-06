@@ -70,9 +70,23 @@ func (analyser *Analyser) printScore() {
 	}
 }
 
+func printParticipant(steamID uint64, name string) {
+	fmt.Printf("https://steamcommunity.com/profiles/%d (%s)\n", steamID, name)
+}
+
 func (analyser *Analyser) printSpectators() {
 	fmt.Println("Spectators:")
 	for steamID, name := range analyser.spectators {
-		fmt.Printf("https://steamcommunity.com/profiles/%d (%s)\n", steamID, name)
+		printParticipant(steamID, name)
+	}
+}
+
+func (analyser *Analyser) printPlayers() {
+	fmt.Println("Players:")
+	for teamName, players := range analyser.players {
+		fmt.Printf("%s:\n", teamName)
+		for steamID, name := range players {
+			printParticipant(steamID, name)
+		}
 	}
 }
