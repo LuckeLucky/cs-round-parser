@@ -75,6 +75,7 @@ func printParticipant(steamID uint64, name string) {
 }
 
 func (analyser *Analyser) printSpectators() {
+	fmt.Println("----------------------------")
 	fmt.Println("Spectators:")
 	for steamID, name := range analyser.spectators {
 		printParticipant(steamID, name)
@@ -82,8 +83,8 @@ func (analyser *Analyser) printSpectators() {
 }
 
 func (analyser *Analyser) printPlayers() {
-	fmt.Println("Players:")
 	for teamName, players := range analyser.players {
+		fmt.Println("----------------------------")
 		fmt.Printf("%s:\n", teamName)
 		for steamID, name := range players {
 			printParticipant(steamID, name)
