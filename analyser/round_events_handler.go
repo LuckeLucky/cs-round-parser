@@ -83,6 +83,7 @@ func (analyser *Analyser) handlerRoundEnd(e events.RoundEnd) {
 	analyser.printScore()
 	analyser.setRoundEnd(tick)
 	analyser.checkForMatchHalfOrEnd()
+	analyser.setParticipants()
 }
 
 func (analyser *Analyser) handlerRoundEndOfficial(e events.RoundEndOfficial) {
@@ -109,6 +110,7 @@ func (analyser *Analyser) handlerRoundEndOfficial(e events.RoundEndOfficial) {
 		analyser.printScore()
 		analyser.setRoundEndOfficial(tick)
 		analyser.checkForMatchHalfOrEnd()
+		analyser.setParticipants()
 		return
 	}
 

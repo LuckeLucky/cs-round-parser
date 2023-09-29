@@ -36,3 +36,25 @@ func (analyser *Analyser) printScore() {
 		fmt.Printf("%s vs %s  %d : %d\n", color.BlueString(ctName), color.RedString(tName), analyser.ctScore, analyser.tScore)
 	}
 }
+
+func printParticipant(steamID uint64, name string) {
+	fmt.Printf("https://steamcommunity.com/profiles/%d (%s)\n", steamID, name)
+}
+
+func (analyser *Analyser) printSpectators() {
+	fmt.Println("----------------------------")
+	fmt.Println("Spectators:")
+	for steamID, name := range analyser.spectators {
+		printParticipant(steamID, name)
+	}
+}
+
+func (analyser *Analyser) printPlayers() {
+	for teamName, players := range analyser.players {
+		fmt.Println("----------------------------")
+		fmt.Printf("%s:\n", teamName)
+		for steamID, name := range players {
+			printParticipant(steamID, name)
+		}
+	}
+}

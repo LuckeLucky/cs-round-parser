@@ -40,6 +40,10 @@ type Analyser struct {
 	currentOvertimeStartMoney int
 	overtimeMaxRounds         int
 	freeArmor                 int
+
+	//Demo participants
+	spectators map[uint64]string
+	players    map[string](map[uint64]string)
 }
 
 func NewAnalyser(demostream io.Reader) *Analyser {
@@ -81,4 +85,6 @@ func (analyser *Analyser) FirstParse() {
 
 	analyser.printMap()
 	analyser.printRoundsPlayed()
+	analyser.printPlayers()
+	analyser.printSpectators()
 }
