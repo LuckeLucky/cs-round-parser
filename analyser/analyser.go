@@ -79,7 +79,6 @@ func (analyser *Analyser) FirstParse() {
 		utils.CheckError(err)
 	}
 
-	analyser.printHalfs()
 	analyser.printMap()
 	analyser.printRoundsPlayed()
 }
