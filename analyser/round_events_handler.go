@@ -1,8 +1,8 @@
 package analyser
 
 import (
-	"github.com/markus-wa/demoinfocs-golang/v2/pkg/demoinfocs/common"
-	"github.com/markus-wa/demoinfocs-golang/v2/pkg/demoinfocs/events"
+	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/common"
+	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/events"
 )
 
 type Half struct {

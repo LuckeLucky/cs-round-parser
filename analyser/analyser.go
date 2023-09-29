@@ -4,10 +4,8 @@ import (
 	"io"
 
 	"github.com/LuckeLucky/cs-round-parser/utils"
-	"github.com/gogo/protobuf/proto"
 
-	demoinfocs "github.com/markus-wa/demoinfocs-golang/v2/pkg/demoinfocs"
-	"github.com/markus-wa/demoinfocs-golang/v2/pkg/demoinfocs/msg"
+	demoinfocs "github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs"
 )
 
 type Analyser struct {
@@ -49,11 +47,11 @@ type Analyser struct {
 func NewAnalyser(demostream io.Reader) *Analyser {
 	analyser := &Analyser{}
 	analyser.cfg = demoinfocs.DefaultParserConfig
-	analyser.cfg.AdditionalNetMessageCreators = map[int]demoinfocs.NetMessageCreator{
+	/* analyser.cfg.AdditionalNetMessageCreators = map[int]demoinfocs.NetMessageCreator{
 		6: func() proto.Message {
 			return new(msg.CNETMsg_SetConVar)
 		},
-	}
+	} */
 
 	parser := demoinfocs.NewParserWithConfig(demostream, analyser.cfg)
 	analyser.parser = parser

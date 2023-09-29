@@ -3,24 +3,26 @@ package analyser
 import (
 	"strconv"
 
-	"github.com/markus-wa/demoinfocs-golang/v2/pkg/demoinfocs/events"
-	"github.com/markus-wa/demoinfocs-golang/v2/pkg/demoinfocs/msg"
+	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/events"
+	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/msg"
 )
 
 func (analyser *Analyser) registerNetMessageHandlers() {
 	// Register handler for net messages updates
 	analyser.parser.RegisterNetMessageHandler(func(m *msg.CNETMsg_SetConVar) {
 		for _, cvar := range m.Convars.Cvars {
-			if cvar.Name == "mp_overtime_maxrounds" {
-				analyser.overtimeMaxRounds, _ = strconv.Atoi(cvar.Value)
-			} else if cvar.Name == "mp_startmoney" {
-				analyser.currentStartMoney, _ = strconv.Atoi(cvar.Value)
+			cvarName := cvar.GetName()
+			cvarValue := cvar.GetValue()
+			if cvarName == "mp_overtime_maxrounds" {
+				analyser.overtimeMaxRounds, _ = strconv.Atoi(cvarValue)
+			} else if cvarName == "mp_startmoney" {
+				analyser.currentStartMoney, _ = strconv.Atoi(cvarValue)
 				analyser.isMoneySet = true
-			} else if cvar.Name == "mp_free_armor" {
-				analyser.freeArmor, _ = strconv.Atoi(cvar.Value)
-			} else if cvar.Name == "mp_overtime_startmoney" {
+			} else if cvarName == "mp_free_armor" {
+				analyser.freeArmor, _ = strconv.Atoi(cvarValue)
+			} else if cvarName == "mp_overtime_startmoney" {
 				/*sometimes mp_overtime_startmoney is used instead of start_money for overtimes*/
-				analyser.currentOvertimeStartMoney, _ = strconv.Atoi(cvar.Value)
+				analyser.currentOvertimeStartMoney, _ = strconv.Atoi(cvarValue)
 				analyser.isOvertimeMoneySet = true
 			}
 		}
