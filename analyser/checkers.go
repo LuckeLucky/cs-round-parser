@@ -1,8 +1,8 @@
 package analyser
 
 import (
-	"github.com/LuckeLucky/demo-analyser-csgo/global"
-	"github.com/LuckeLucky/demo-analyser-csgo/utils"
+	"github.com/LuckeLucky/cs-round-parser/global"
+	"github.com/LuckeLucky/cs-round-parser/utils"
 )
 
 const (

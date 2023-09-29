@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/LuckeLucky/demo-analyser-csgo/analyser"
-	"github.com/LuckeLucky/demo-analyser-csgo/utils"
+	"github.com/LuckeLucky/cs-round-parser/analyser"
+	"github.com/LuckeLucky/cs-round-parser/utils"
 )
 
 func readDemos() {

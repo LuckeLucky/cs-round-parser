@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/LuckeLucky/demo-analyser-csgo/global"
+	"github.com/LuckeLucky/cs-round-parser/global"
 )
 
 func init() {

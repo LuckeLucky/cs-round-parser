@@ -18,7 +18,7 @@ Build parser to parse a single .dem file:
 
 Example usage:
 ```sh
-     .\demo-analyser-csgo.exe -ot 13000
+     .\cs-round-parser.exe -ot 13000
 ```
 
 If we are parsing the overtime all rounds in overtime should have "mp_overtime_startmoney" equal to 13000

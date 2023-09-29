@@ -1,4 +1,4 @@
-module github.com/LuckeLucky/demo-analyser-csgo
+module github.com/LuckeLucky/cs-round-parser
 
 go 1.14
 

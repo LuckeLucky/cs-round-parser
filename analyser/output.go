@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/LuckeLucky/demo-analyser-csgo/utils"
+	"github.com/LuckeLucky/cs-round-parser/utils"
 	"github.com/fatih/color"
 )
 

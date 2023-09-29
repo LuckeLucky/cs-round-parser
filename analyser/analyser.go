@@ -3,7 +3,7 @@ package analyser
 import (
 	"io"
 
-	"github.com/LuckeLucky/demo-analyser-csgo/utils"
+	"github.com/LuckeLucky/cs-round-parser/utils"
 	"github.com/gogo/protobuf/proto"
 
 	demoinfocs "github.com/markus-wa/demoinfocs-golang/v2/pkg/demoinfocs"
