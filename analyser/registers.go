@@ -5,12 +5,13 @@ import (
 
 	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/events"
 	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/msg"
+	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/msgs2"
 )
 
 func (analyser *Analyser) registerNetMessageHandlers() {
 	// Register handler for net messages updates
-	analyser.parser.RegisterNetMessageHandler(func(m *msg.CNETMsg_SetConVar) {
-		for _, cvar := range m.Convars.Cvars {
+	analyser.parser.RegisterNetMessageHandler(func(msg *msg.CNETMsg_SetConVar) {
+		for _, cvar := range msg.Convars.Cvars {
 			cvarName := cvar.GetName()
 			cvarValue := cvar.GetValue()
 			if cvarName == "mp_overtime_maxrounds" {
@@ -27,10 +28,15 @@ func (analyser *Analyser) registerNetMessageHandlers() {
 			}
 		}
 	})
+
+	analyser.parser.RegisterNetMessageHandler(func(msg *msgs2.CSVCMsg_ServerInfo) {
+		analyser.mapName = msg.GetMapName()
+	})
 }
 
 func (analyser *Analyser) registerMatchEventHandlers() {
 	//Round start
+	analyser.parser.RegisterEventHandler(func(e events.MatchStart) { analyser.handlerRoundStart(e) })
 	analyser.parser.RegisterEventHandler(func(e events.RoundStart) { analyser.handlerRoundStart(e) })
 	analyser.parser.RegisterEventHandler(func(e events.MatchStartedChanged) { analyser.handlerRoundStart(e) })
 	analyser.parser.RegisterEventHandler(func(e events.RoundFreezetimeEnd) { analyser.handlerRoundStart(e) })
