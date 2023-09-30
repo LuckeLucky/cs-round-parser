@@ -45,13 +45,17 @@ func (analyser *Analyser) handlerRoundStart(e interface{}) {
 		}
 	}
 
+	if analyser.isPreGame() {
+		return
+	}
+
 	if !analyser.checkValidRoundStartMoney() {
 		return
 	}
 	if !analyser.checkFreeArmor() {
 		return
 	}
-	if !analyser.checkFirstRoundStartEquipmentValue() {
+	if !analyser.isScoreEmpty() && analyser.roundsPlayed == 0 {
 		return
 	}
 	analyser.roundStarted = true
@@ -68,18 +72,22 @@ func (analyser *Analyser) handlerRoundEnd(e events.RoundEnd) {
 	if !analyser.roundStarted {
 		return
 	}
-
+	//Score not updated in source
+	winnerScore := e.WinnerState.Score()
+	loserScore := e.LoserState.Score()
+	if !analyser.isSource2 {
+		winnerScore = winnerScore + 1
+	}
 	switch e.Winner {
 	case common.TeamCounterTerrorists:
 		analyser.halfCtScore++
-		analyser.ctScore = e.WinnerState.Score() + 1
-		analyser.tScore = e.LoserState.Score()
+		analyser.ctScore = winnerScore
+		analyser.tScore = loserScore
 	case common.TeamTerrorists:
 		analyser.halfTScore++
-		analyser.tScore = e.WinnerState.Score() + 1
-		analyser.ctScore = e.LoserState.Score()
+		analyser.tScore = winnerScore
+		analyser.ctScore = loserScore
 	}
-
 	analyser.printScore()
 	analyser.setRoundEnd(tick)
 	analyser.checkForMatchHalfOrEnd()

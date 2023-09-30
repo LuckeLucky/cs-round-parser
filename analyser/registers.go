@@ -36,7 +36,6 @@ func (analyser *Analyser) registerNetMessageHandlers() {
 
 func (analyser *Analyser) registerMatchEventHandlers() {
 	//Round start
-	analyser.parser.RegisterEventHandler(func(e events.MatchStart) { analyser.handlerRoundStart(e) })
 	analyser.parser.RegisterEventHandler(func(e events.RoundStart) { analyser.handlerRoundStart(e) })
 	analyser.parser.RegisterEventHandler(func(e events.MatchStartedChanged) { analyser.handlerRoundStart(e) })
 	analyser.parser.RegisterEventHandler(func(e events.RoundFreezetimeEnd) { analyser.handlerRoundStart(e) })

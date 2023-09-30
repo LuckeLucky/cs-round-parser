@@ -3,6 +3,7 @@ package analyser
 import (
 	"github.com/LuckeLucky/cs-round-parser/global"
 	"github.com/LuckeLucky/cs-round-parser/utils"
+	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/common"
 )
 
 const (
@@ -57,7 +58,6 @@ func (analyser *Analyser) checkMatchFinished() bool {
 			return true
 		}
 	}
-
 	return false
 }
 
@@ -69,15 +69,26 @@ func (analyser *Analyser) checkFreeArmor() bool {
 	return analyser.freeArmor == 0
 }
 
-func (analyser *Analyser) checkFirstRoundStartEquipmentValue() bool {
+func (analyser *Analyser) isPreGame() bool {
+	return analyser.parser.GameState().GamePhase() == common.GamePhasePregame
+}
+
+func (analyser *Analyser) isScoreEmpty() bool {
 	//T and CT start with 1k money in first Round
 	if analyser.roundsPlayed > 0 {
-		return true
+		return false
 	}
 
-	// 1000 = 5xglock or 5xusp
-	return analyser.parser.GameState().TeamCounterTerrorists().RoundStartEquipmentValue() == 1000 &&
-		analyser.parser.GameState().TeamTerrorists().RoundStartEquipmentValue() == 1000
+	for _, participant := range analyser.parser.GameState().Participants().AllByUserID() {
+		if participant.Team > 1 && participant.Entity != nil {
+			sumScore := participant.Kills() + participant.Deaths() + participant.Assists() + participant.Score()
+			if sumScore > 0 {
+				return false
+			}
+
+		}
+	}
+	return true
 }
 
 func (analyser *Analyser) checkForMatchHalfOrEnd() {

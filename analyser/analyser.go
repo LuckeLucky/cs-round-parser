@@ -9,7 +9,8 @@ import (
 )
 
 type Analyser struct {
-	parser demoinfocs.Parser
+	parser    demoinfocs.Parser
+	isSource2 bool
 
 	cfg     demoinfocs.ParserConfig
 	mapName string
@@ -21,8 +22,7 @@ type Analyser struct {
 	halfs         []*Half
 
 	roundStarted bool
-
-	matchEnded bool
+	matchEnded   bool
 
 	//Current ScoreBoard scores
 	ctScore int
@@ -61,10 +61,10 @@ func NewAnalyser(demostream io.Reader) *Analyser {
 }
 
 func (analyser *Analyser) handleHeader() {
-
 	header, err := analyser.parser.ParseHeader()
 	utils.CheckError(err)
 	analyser.mapName = header.MapName
+	analyser.isSource2 = header.Filestamp == "PBDEMS2"
 }
 
 // Used to gather information about RoundStart..End and team scores
