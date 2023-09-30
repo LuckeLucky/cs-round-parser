@@ -33,7 +33,7 @@ func (analyser *Analyser) setRoundFinish() {
 }
 
 func (analyser *Analyser) setParticipants() {
-	for _, participant := range analyser.parser.GameState().Participants().Connected() {
+	for _, participant := range analyser.parser.GameState().Participants().AllByUserID() {
 		//1 corresponds to team Spectators
 		steamID := participant.SteamID64
 		name := participant.Name
