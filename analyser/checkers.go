@@ -6,11 +6,6 @@ import (
 	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/common"
 )
 
-const (
-	MAX_ROUNDS_REGULAR = 30
-	WIN_ROUNDS_REGULAR = MAX_ROUNDS_REGULAR/2 + 1
-)
-
 func (analyser *Analyser) checkValidRoundStartMoney() bool {
 	// if the money value is not set, no need to check
 	if !analyser.isMoneySet {
@@ -31,13 +26,13 @@ func (analyser *Analyser) checkValidRoundStartMoney() bool {
 }
 
 func (analyser *Analyser) checkMatchHalf() bool {
-	if analyser.roundsPlayed == MAX_ROUNDS_REGULAR/2 {
+	if analyser.roundsPlayed == analyser.maxRounds/2 {
 		return true
 	}
 
 	ctScore, tScore := analyser.ctScore, analyser.tScore
 	// overtime
-	roundsInOvertime := ctScore + tScore - MAX_ROUNDS_REGULAR
+	roundsInOvertime := ctScore + tScore - analyser.maxRounds
 	if roundsInOvertime == 0 && ctScore == tScore {
 		return true
 	} else if roundsInOvertime > 0 {
@@ -48,9 +43,10 @@ func (analyser *Analyser) checkMatchHalf() bool {
 
 func (analyser *Analyser) checkMatchFinished() bool {
 	ctScore, tScore := analyser.ctScore, analyser.tScore
-	roundsInOvertime := ctScore + tScore - MAX_ROUNDS_REGULAR
+	roundsInOvertime := ctScore + tScore - analyser.maxRounds
+	winRegular := analyser.maxRounds/2 + 1
 
-	if ((ctScore == WIN_ROUNDS_REGULAR) != (tScore == WIN_ROUNDS_REGULAR)) || roundsInOvertime >= 0 {
+	if ((ctScore == winRegular) != (tScore == winRegular)) || roundsInOvertime >= 0 {
 		absDiff := utils.Abs(ctScore - tScore)
 		x := roundsInOvertime % analyser.overtimeMaxRounds
 		nRoundsOfOTHalf := analyser.overtimeMaxRounds / 2
@@ -94,7 +90,6 @@ func (analyser *Analyser) isScoreEmpty() bool {
 func (analyser *Analyser) checkForMatchHalfOrEnd() {
 	isEnd, isHalf := analyser.checkMatchFinished(), analyser.checkMatchHalf()
 	if isEnd || isHalf {
-		analyser.setNewHalf()
 		if isEnd {
 			analyser.setMatchEnded()
 			analyser.printFinish()

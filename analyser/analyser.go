@@ -19,7 +19,6 @@ type Analyser struct {
 	currentRound  *Round
 	previousRound *Round
 	roundsPlayed  int
-	halfs         []*Half
 
 	roundStarted bool
 	matchEnded   bool
@@ -36,6 +35,7 @@ type Analyser struct {
 	isOvertimeMoneySet        bool
 	currentStartMoney         int
 	currentOvertimeStartMoney int
+	maxRounds                 int
 	overtimeMaxRounds         int
 	freeArmor                 int
 
@@ -47,11 +47,6 @@ type Analyser struct {
 func NewAnalyser(demostream io.Reader) *Analyser {
 	analyser := &Analyser{}
 	analyser.cfg = demoinfocs.DefaultParserConfig
-	/* analyser.cfg.AdditionalNetMessageCreators = map[int]demoinfocs.NetMessageCreator{
-		6: func() proto.Message {
-			return new(msg.CNETMsg_SetConVar)
-		},
-	} */
 
 	parser := demoinfocs.NewParserWithConfig(demostream, analyser.cfg)
 	analyser.parser = parser

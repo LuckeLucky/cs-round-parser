@@ -25,12 +25,24 @@ func (analyser *Analyser) registerNetMessageHandlers() {
 				/*sometimes mp_overtime_startmoney is used instead of start_money for overtimes*/
 				analyser.currentOvertimeStartMoney, _ = strconv.Atoi(cvarValue)
 				analyser.isOvertimeMoneySet = true
+			} else if cvarName == "mp_maxrounds" {
+				analyser.maxRounds, _ = strconv.Atoi(cvarValue)
 			}
 		}
 	})
 
 	analyser.parser.RegisterNetMessageHandler(func(msg *msgs2.CSVCMsg_ServerInfo) {
 		analyser.mapName = msg.GetMapName()
+	})
+
+	analyser.parser.RegisterNetMessageHandler(func(msg *msgs2.CNETMsg_SetConVar) {
+		for _, cvar := range msg.Convars.Cvars {
+			cvarName := cvar.GetName()
+			cvarValue := cvar.GetValue()
+			if cvarName == "mp_maxrounds" {
+				analyser.maxRounds, _ = strconv.Atoi(cvarValue)
+			}
+		}
 	})
 }
 

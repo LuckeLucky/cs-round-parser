@@ -5,14 +5,6 @@ import (
 	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/events"
 )
 
-type Half struct {
-	ctName string
-	tName  string
-
-	halfCtScore int
-	halfTScore  int
-}
-
 type Round struct {
 	startTick       int
 	endTick         int
