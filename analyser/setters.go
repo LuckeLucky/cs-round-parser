@@ -33,7 +33,7 @@ func (analyser *Analyser) setParticipants() {
 				analyser.spectators[steamID] = name
 			}
 		} else if participant.Team != 0 {
-			clanName := participant.TeamState.ClanName()
+			clanName := analyser.getTeamName(participant.TeamState)
 			if _, ok := analyser.players[clanName]; !ok {
 				analyser.players[clanName] = make(map[uint64]string)
 			}
