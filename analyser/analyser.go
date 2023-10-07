@@ -9,7 +9,8 @@ import (
 )
 
 type Analyser struct {
-	parser demoinfocs.Parser
+	parser    demoinfocs.Parser
+	isSource2 bool
 
 	cfg     demoinfocs.ParserConfig
 	mapName string
@@ -18,11 +19,9 @@ type Analyser struct {
 	currentRound  *Round
 	previousRound *Round
 	roundsPlayed  int
-	halfs         []*Half
 
 	roundStarted bool
-
-	matchEnded bool
+	matchEnded   bool
 
 	//Current ScoreBoard scores
 	ctScore int
@@ -36,6 +35,7 @@ type Analyser struct {
 	isOvertimeMoneySet        bool
 	currentStartMoney         int
 	currentOvertimeStartMoney int
+	maxRounds                 int
 	overtimeMaxRounds         int
 	freeArmor                 int
 
@@ -47,11 +47,6 @@ type Analyser struct {
 func NewAnalyser(demostream io.Reader) *Analyser {
 	analyser := &Analyser{}
 	analyser.cfg = demoinfocs.DefaultParserConfig
-	/* analyser.cfg.AdditionalNetMessageCreators = map[int]demoinfocs.NetMessageCreator{
-		6: func() proto.Message {
-			return new(msg.CNETMsg_SetConVar)
-		},
-	} */
 
 	parser := demoinfocs.NewParserWithConfig(demostream, analyser.cfg)
 	analyser.parser = parser
@@ -61,10 +56,10 @@ func NewAnalyser(demostream io.Reader) *Analyser {
 }
 
 func (analyser *Analyser) handleHeader() {
-
 	header, err := analyser.parser.ParseHeader()
 	utils.CheckError(err)
 	analyser.mapName = header.MapName
+	analyser.isSource2 = header.Filestamp == "PBDEMS2"
 }
 
 // Used to gather information about RoundStart..End and team scores

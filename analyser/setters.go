@@ -1,14 +1,5 @@
 package analyser
 
-func (analyser *Analyser) setNewHalf() {
-	analyser.halfs = append(analyser.halfs, &Half{
-		ctName:      analyser.parser.GameState().TeamCounterTerrorists().ClanName(),
-		tName:       analyser.parser.GameState().TeamTerrorists().ClanName(),
-		halfCtScore: analyser.halfCtScore,
-		halfTScore:  analyser.halfTScore,
-	})
-}
-
 func (analyser *Analyser) setRoundEnd(tick int) {
 	analyser.roundStarted = false
 	analyser.currentRound.endTick = tick
@@ -26,6 +17,8 @@ func (analyser *Analyser) setMatchEnded() {
 }
 
 func (analyser *Analyser) setRoundFinish() {
+	analyser.currentRound.ctScore = analyser.ctScore
+	analyser.currentRound.tScore = analyser.tScore
 	analyser.rounds = append(analyser.rounds, analyser.currentRound)
 	analyser.roundsPlayed++
 	analyser.previousRound = analyser.currentRound
@@ -33,7 +26,7 @@ func (analyser *Analyser) setRoundFinish() {
 }
 
 func (analyser *Analyser) setParticipants() {
-	for _, participant := range analyser.parser.GameState().Participants().Connected() {
+	for _, participant := range analyser.parser.GameState().Participants().AllByUserID() {
 		//1 corresponds to team Spectators
 		steamID := participant.SteamID64
 		name := participant.Name
@@ -42,7 +35,7 @@ func (analyser *Analyser) setParticipants() {
 				analyser.spectators[steamID] = name
 			}
 		} else if participant.Team != 0 {
-			clanName := participant.TeamState.ClanName()
+			clanName := analyser.getTeamName(participant.TeamState)
 			if _, ok := analyser.players[clanName]; !ok {
 				analyser.players[clanName] = make(map[uint64]string)
 			}

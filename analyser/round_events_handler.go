@@ -5,18 +5,13 @@ import (
 	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/events"
 )
 
-type Half struct {
-	ctName string
-	tName  string
-
-	halfCtScore int
-	halfTScore  int
-}
-
 type Round struct {
 	startTick       int
 	endTick         int
 	endOfficialTick int
+	ctScore         int
+	tScore          int
+	winner          common.Team
 }
 
 func (analyser *Analyser) handlerRoundStart(e interface{}) {
@@ -45,13 +40,17 @@ func (analyser *Analyser) handlerRoundStart(e interface{}) {
 		}
 	}
 
+	if analyser.isPreGame() {
+		return
+	}
+
 	if !analyser.checkValidRoundStartMoney() {
 		return
 	}
 	if !analyser.checkFreeArmor() {
 		return
 	}
-	if !analyser.checkFirstRoundStartEquipmentValue() {
+	if !analyser.isScoreEmpty() && analyser.roundsPlayed == 0 {
 		return
 	}
 	analyser.roundStarted = true
@@ -68,18 +67,24 @@ func (analyser *Analyser) handlerRoundEnd(e events.RoundEnd) {
 	if !analyser.roundStarted {
 		return
 	}
-
+	//Score not updated in source
+	winnerScore := e.WinnerState.Score()
+	loserScore := e.LoserState.Score()
+	if !analyser.isSource2 {
+		winnerScore = winnerScore + 1
+	}
 	switch e.Winner {
 	case common.TeamCounterTerrorists:
 		analyser.halfCtScore++
-		analyser.ctScore = e.WinnerState.Score() + 1
-		analyser.tScore = e.LoserState.Score()
+		analyser.ctScore = winnerScore
+		analyser.tScore = loserScore
+		analyser.currentRound.winner = common.TeamCounterTerrorists
 	case common.TeamTerrorists:
 		analyser.halfTScore++
-		analyser.tScore = e.WinnerState.Score() + 1
-		analyser.ctScore = e.LoserState.Score()
+		analyser.tScore = winnerScore
+		analyser.ctScore = loserScore
+		analyser.currentRound.winner = common.TeamTerrorists
 	}
-
 	analyser.printScore()
 	analyser.setRoundEnd(tick)
 	analyser.checkForMatchHalfOrEnd()
@@ -101,11 +106,13 @@ func (analyser *Analyser) handlerRoundEndOfficial(e events.RoundEndOfficial) {
 			analyser.halfCtScore++
 			analyser.ctScore = analyser.parser.GameState().TeamCounterTerrorists().Score()
 			analyser.tScore = analyser.parser.GameState().TeamTerrorists().Score()
+			analyser.currentRound.winner = common.TeamCounterTerrorists
 			//t won the round
 		} else if analyser.parser.GameState().TeamTerrorists().Score() > analyser.tScore {
 			analyser.halfTScore++
 			analyser.tScore = analyser.parser.GameState().TeamTerrorists().Score()
 			analyser.ctScore = analyser.parser.GameState().TeamCounterTerrorists().Score()
+			analyser.currentRound.winner = common.TeamTerrorists
 		}
 		analyser.printScore()
 		analyser.setRoundEndOfficial(tick)

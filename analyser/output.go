@@ -28,8 +28,8 @@ func (analyser *Analyser) printRoundsPlayed() {
 }
 
 func (analyser *Analyser) printScore() {
-	ctName := analyser.parser.GameState().TeamCounterTerrorists().ClanName()
-	tName := analyser.parser.GameState().TeamTerrorists().ClanName()
+	ctName := analyser.getTeamName(analyser.parser.GameState().TeamCounterTerrorists())
+	tName := analyser.getTeamName(analyser.parser.GameState().TeamTerrorists())
 	if utils.IsWindows() {
 		fmt.Fprintf(color.Output, "%s vs %s  %d : %d\n", color.BlueString(ctName), color.RedString(tName), analyser.ctScore, analyser.tScore)
 	} else {

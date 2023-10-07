@@ -1,6 +1,7 @@
 package analyser
 
 func (analyser *Analyser) setDefault() {
+	analyser.maxRounds = 30
 	analyser.overtimeMaxRounds = 6
 	analyser.freeArmor = 0
 	analyser.matchEnded = false
