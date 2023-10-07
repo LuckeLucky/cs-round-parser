@@ -6,7 +6,7 @@ toolchain go1.21.1
 
 require (
 	github.com/fatih/color v1.15.0
-	github.com/markus-wa/demoinfocs-golang/v4 v4.0.0-beta.2
+	github.com/markus-wa/demoinfocs-golang/v4 v4.0.0-beta.2.0.20231002112952-28a80ab5ead6
 )
 
 require (
