@@ -29,4 +29,4 @@ In Windows ".dem" files can be set to open with "cs-round-parser.exe".
 ```
 
 # Acknowledgments
-This analyser relies on [demoinfocs-golang](https://github.com/markus-wa/demoinfocs-golang).
+This parser relies on [demoinfocs-golang](https://github.com/markus-wa/demoinfocs-golang).
