@@ -16,8 +16,9 @@ Example usage:
      .\cs-round-parser.exe -ot 13000
      .\cs-round-parser.exe .\demos\saw_vs_ftw.dem
 ```
-If the first argument is not a specific file the parser will read all demos stored in ".\demos"
-In Windows ".dem" files can be set to open with "cs-round-parser.exe"
+
+If the first argument is not a specific file the parser will read all demos stored in ".\demos".
+In Windows ".dem" files can be set to open with "cs-round-parser.exe".
 
 # Coverage
 
@@ -27,4 +28,4 @@ In Windows ".dem" files can be set to open with "cs-round-parser.exe"
 ```
 
 # Acknowledgments
-This analyser relies on [demoinfocs-golang](https://github.com/markus-wa/demoinfocs-golang)
+This analyser relies on [demoinfocs-golang](https://github.com/markus-wa/demoinfocs-golang).
