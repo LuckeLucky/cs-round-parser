@@ -9,6 +9,9 @@ type Round struct {
 	startTick       int
 	endTick         int
 	endOfficialTick int
+	ctScore         int
+	tScore          int
+	winner          common.Team
 }
 
 func (analyser *Analyser) handlerRoundStart(e interface{}) {
@@ -75,10 +78,12 @@ func (analyser *Analyser) handlerRoundEnd(e events.RoundEnd) {
 		analyser.halfCtScore++
 		analyser.ctScore = winnerScore
 		analyser.tScore = loserScore
+		analyser.currentRound.winner = common.TeamCounterTerrorists
 	case common.TeamTerrorists:
 		analyser.halfTScore++
 		analyser.tScore = winnerScore
 		analyser.ctScore = loserScore
+		analyser.currentRound.winner = common.TeamTerrorists
 	}
 	analyser.printScore()
 	analyser.setRoundEnd(tick)
@@ -101,11 +106,13 @@ func (analyser *Analyser) handlerRoundEndOfficial(e events.RoundEndOfficial) {
 			analyser.halfCtScore++
 			analyser.ctScore = analyser.parser.GameState().TeamCounterTerrorists().Score()
 			analyser.tScore = analyser.parser.GameState().TeamTerrorists().Score()
+			analyser.currentRound.winner = common.TeamCounterTerrorists
 			//t won the round
 		} else if analyser.parser.GameState().TeamTerrorists().Score() > analyser.tScore {
 			analyser.halfTScore++
 			analyser.tScore = analyser.parser.GameState().TeamTerrorists().Score()
 			analyser.ctScore = analyser.parser.GameState().TeamCounterTerrorists().Score()
+			analyser.currentRound.winner = common.TeamTerrorists
 		}
 		analyser.printScore()
 		analyser.setRoundEndOfficial(tick)

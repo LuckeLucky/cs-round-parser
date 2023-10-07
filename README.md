@@ -23,3 +23,11 @@ Example usage:
 
 If we are parsing the overtime all rounds in overtime should have "mp_overtime_startmoney" equal to 13000
 
+
+# Coverage
+
+```sh
+    go test -v -coverprofile cover.out ./
+    go tool cover -html cover.out -o cover.html
+```
+

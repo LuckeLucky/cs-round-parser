@@ -17,6 +17,8 @@ func (analyser *Analyser) setMatchEnded() {
 }
 
 func (analyser *Analyser) setRoundFinish() {
+	analyser.currentRound.ctScore = analyser.ctScore
+	analyser.currentRound.tScore = analyser.tScore
 	analyser.rounds = append(analyser.rounds, analyser.currentRound)
 	analyser.roundsPlayed++
 	analyser.previousRound = analyser.currentRound
