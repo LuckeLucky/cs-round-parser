@@ -18,6 +18,7 @@ Example usage:
 ```
 
 If the first argument is not a specific file the parser will read all demos stored in ".\demos".
+
 In Windows ".dem" files can be set to open with "cs-round-parser.exe".
 
 # Coverage
