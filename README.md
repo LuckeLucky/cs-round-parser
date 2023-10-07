@@ -13,7 +13,7 @@ Build parser
 
 Example usage:
 ```sh
-     .\cs-round-parser.exe -ot 13000
+     .\cs-round-parser.exe -otM 13000
      .\cs-round-parser.exe .\demos\saw_vs_ftw.dem
 ```
 
