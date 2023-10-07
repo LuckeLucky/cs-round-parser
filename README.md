@@ -1,15 +1,10 @@
 # Build
-Build parser to parse .dem inserted in "\demos" folder:
+Build parser
 ```sh
     go build
 ```
 
-Build parser to parse a single .dem file:
-```sh
-    go build -tags single
-```
-
-# Command-line arguments
+# Usage
 
 | Command | Value type | Default |
 |---|---|---|
@@ -19,10 +14,10 @@ Build parser to parse a single .dem file:
 Example usage:
 ```sh
      .\cs-round-parser.exe -ot 13000
+     .\cs-round-parser.exe .\demos\saw_vs_ftw.dem
 ```
-
-If we are parsing the overtime all rounds in overtime should have "mp_overtime_startmoney" equal to 13000
-
+If the first argument is not a specific file the parser will read all demos stored in ".\demos"
+In Windows ".dem" files can be set to open with "cs-round-parser.exe"
 
 # Coverage
 
@@ -31,3 +26,5 @@ If we are parsing the overtime all rounds in overtime should have "mp_overtime_s
     go tool cover -html cover.out -o cover.html
 ```
 
+# Acknowledgments
+This analyser relies on [demoinfocs-golang](https://github.com/markus-wa/demoinfocs-golang)
