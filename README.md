@@ -13,7 +13,7 @@ Build parser
 
 Example usage:
 ```sh
-     .\cs-round-parser.exe -ot 13000
+     .\cs-round-parser.exe -otM 13000
      .\cs-round-parser.exe .\demos\saw_vs_ftw.dem
 ```
 
@@ -29,4 +29,4 @@ In Windows ".dem" files can be set to open with "cs-round-parser.exe".
 ```
 
 # Acknowledgments
-This analyser relies on [demoinfocs-golang](https://github.com/markus-wa/demoinfocs-golang).
+This parser relies on [demoinfocs-golang](https://github.com/markus-wa/demoinfocs-golang).
