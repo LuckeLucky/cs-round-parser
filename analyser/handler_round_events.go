@@ -20,11 +20,11 @@ func (analyser *Analyser) registerMatchEventHandlers() {
 	analyser.parser.RegisterEventHandler(func(e events.MatchStartedChanged) { analyser.handlerRoundStart(e) })
 	analyser.parser.RegisterEventHandler(func(e events.RoundFreezetimeEnd) { analyser.handlerRoundStart(e) })
 	//Round ends
-	analyser.parser.RegisterEventHandler(func(e events.RoundEnd) { analyser.handlerRoundEnd(e) })
-	analyser.parser.RegisterEventHandler(func(e events.RoundEndOfficial) { analyser.handlerRoundEndOfficial(e) })
+	analyser.parser.RegisterEventHandler(func(e events.RoundEnd) { analyser.handleRoundEnd(e) })
+	analyser.parser.RegisterEventHandler(func(e events.RoundEndOfficial) { analyser.handleRoundEndOfficial(e) })
 
 	//Handle side switch
-	analyser.parser.RegisterEventHandler(func(e events.TeamSideSwitch) { analyser.handlerSideSwitch() })
+	analyser.parser.RegisterEventHandler(func(e events.TeamSideSwitch) { analyser.handleSideSwitch() })
 }
 
 func (analyser *Analyser) handlerRoundStart(e interface{}) {
@@ -71,7 +71,7 @@ func (analyser *Analyser) handlerRoundStart(e interface{}) {
 
 }
 
-func (analyser *Analyser) handlerRoundEnd(e events.RoundEnd) {
+func (analyser *Analyser) handleRoundEnd(e events.RoundEnd) {
 	tick, err := analyser.getGameTick()
 	if err {
 		return
@@ -104,7 +104,7 @@ func (analyser *Analyser) handlerRoundEnd(e events.RoundEnd) {
 	analyser.setParticipants()
 }
 
-func (analyser *Analyser) handlerRoundEndOfficial(e events.RoundEndOfficial) {
+func (analyser *Analyser) handleRoundEndOfficial(e events.RoundEndOfficial) {
 	tick, err := analyser.getGameTick()
 	if err {
 		return
@@ -140,7 +140,7 @@ func (analyser *Analyser) handlerRoundEndOfficial(e events.RoundEndOfficial) {
 	}
 }
 
-func (analyser *Analyser) handlerSideSwitch() {
+func (analyser *Analyser) handleSideSwitch() {
 	//Switch our registed sideScores
 	analyser.switchSideScores()
 }

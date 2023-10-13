@@ -12,6 +12,14 @@
             "program": "${workspaceFolder}\\main.go"
         },
         {
+            "name": "Debug Single",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "args": ["./test-demos/5981722.dem"],
+            "program": "${workspaceFolder}\\main.go"
+        }
+        {
             "name": "Build and Launch",
             "preLaunchTask": "build",
             "type": "go",
