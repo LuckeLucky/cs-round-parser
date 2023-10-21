@@ -70,7 +70,10 @@ func TestOvertimes(t *testing.T) {
 	assert.Equal(t, 18, an.rounds[32].tScore)
 }
 
-func TestNoDataPacket(t *testing.T) {
-	an := newAnalyserByPath("../test-demos/esportal_no_data.dem")
-	assert.Equal(t, 23, an.roundsPlayed)
+func TestOvertimeStart(t *testing.T) {
+	an := newAnalyserByPath("../test-demos/immortals-vs-astralis-train-tiebreaker.dem")
+
+	assert.Equal(t, 24, an.roundsPlayed)
+	assert.Equal(t, 7, an.rounds[12].tScore)
+	assert.Equal(t, 10, an.rounds[18].tScore)
 }
