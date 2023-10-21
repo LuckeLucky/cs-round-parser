@@ -1,4 +1,5 @@
 # Build
+
 Build parser
 ```sh
     go build
@@ -6,14 +7,8 @@ Build parser
 
 # Usage
 
-| Command | Value type | Default |
-|---|---|---|
-| -rM | int | 800 is the default regular phase start money |
-| -otM | int | 16000 is the default overtime start money |
-
-Example usage:
 ```sh
-     .\cs-round-parser.exe -otM 13000
+     .\cs-round-parser.exe
      .\cs-round-parser.exe .\demos\saw_vs_ftw.dem
 ```
 
