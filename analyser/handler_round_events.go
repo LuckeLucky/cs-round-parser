@@ -57,9 +57,6 @@ func (analyser *Analyser) handlerRoundStart(e interface{}) {
 		return
 	}
 
-	if !analyser.checkValidRoundStartMoney() {
-		return
-	}
 	if !analyser.checkFreeArmor() {
 		return
 	}

@@ -31,15 +31,8 @@ func (analyser *Analyser) handleSetConvar(name string, value string) {
 	switch name {
 	case "mp_overtime_maxrounds":
 		analyser.overtimeMaxRounds, _ = strconv.Atoi(value)
-	case "mp_startmoney":
-		analyser.currentStartMoney, _ = strconv.Atoi(value)
-		analyser.isMoneySet = true
 	case "mp_free_armor":
 		analyser.freeArmor, _ = strconv.Atoi(value)
-	case "mp_overtime_startmoney":
-		/*sometimes mp_overtime_startmoney is used instead of start_money for overtimes*/
-		analyser.currentOvertimeStartMoney, _ = strconv.Atoi(value)
-		analyser.isOvertimeMoneySet = true
 	case "mp_maxrounds":
 		analyser.maxRounds, _ = strconv.Atoi(value)
 	}

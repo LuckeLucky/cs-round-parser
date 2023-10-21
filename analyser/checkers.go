@@ -1,29 +1,9 @@
 package analyser
 
 import (
-	"github.com/LuckeLucky/cs-round-parser/global"
 	"github.com/LuckeLucky/cs-round-parser/utils"
 	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/common"
 )
-
-func (analyser *Analyser) checkValidRoundStartMoney() bool {
-	// if the money value is not set, no need to check
-	if !analyser.isMoneySet {
-		return true
-	}
-
-	// between 0 - 30 rounds start money is 800
-	if analyser.roundsPlayed < 30 {
-		return analyser.currentStartMoney == global.RegularStartMoney
-	} else {
-		// when overtime money isnt set we can't say if there is a valid ot start moneys
-		if !analyser.isOvertimeMoneySet {
-			return true
-		}
-		return analyser.currentOvertimeStartMoney == global.OvertimeStartMoney
-	}
-
-}
 
 func (analyser *Analyser) checkMatchHalf() bool {
 	if analyser.roundsPlayed == analyser.maxRounds/2 {

@@ -5,7 +5,6 @@ import (
 	"os"
 	"testing"
 
-	"github.com/LuckeLucky/cs-round-parser/global"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -25,8 +24,6 @@ func newAnalyserByPath(path string) *Analyser {
 }
 
 func TestSourceDemo(t *testing.T) {
-	global.RegularStartMoney = 800
-	global.OvertimeStartMoney = 16000
 	an := newAnalyserByPath("../test-demos/main_cs.dem")
 
 	assert.Equal(t, false, an.isSource2)
@@ -47,8 +44,6 @@ func TestSourceDemo(t *testing.T) {
 }
 
 func TestSource2Demo(t *testing.T) {
-	global.RegularStartMoney = 800
-	global.OvertimeStartMoney = 16000
 	an := newAnalyserByPath("../test-demos/main_cs2.dem")
 
 	assert.Equal(t, true, an.isSource2)
@@ -69,10 +64,13 @@ func TestSource2Demo(t *testing.T) {
 }
 
 func TestOvertimes(t *testing.T) {
-	global.RegularStartMoney = 800
-	global.OvertimeStartMoney = 12500
 	an := newAnalyserByPath("../test-demos/cs_overtime.dem")
 
 	assert.Equal(t, 15, an.rounds[32].ctScore)
 	assert.Equal(t, 18, an.rounds[32].tScore)
+}
+
+func TestNoDataPacket(t *testing.T) {
+	an := newAnalyserByPath("../test-demos/esportal_no_data.dem")
+	assert.Equal(t, 23, an.roundsPlayed)
 }

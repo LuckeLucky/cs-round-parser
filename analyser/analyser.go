@@ -31,13 +31,9 @@ type Analyser struct {
 	halfTScore  int
 
 	//Convars -----------------
-	isMoneySet                bool
-	isOvertimeMoneySet        bool
-	currentStartMoney         int
-	currentOvertimeStartMoney int
-	maxRounds                 int
-	overtimeMaxRounds         int
-	freeArmor                 int
+	maxRounds         int
+	overtimeMaxRounds int
+	freeArmor         int
 
 	//Demo participants
 	spectators map[uint64]string

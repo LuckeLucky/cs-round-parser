@@ -7,13 +7,8 @@ import (
 	"strings"
 
 	"github.com/LuckeLucky/cs-round-parser/analyser"
-	"github.com/LuckeLucky/cs-round-parser/global"
 	"github.com/LuckeLucky/cs-round-parser/utils"
 )
-
-func init() {
-	global.SetGlobal()
-}
 
 func main() {
 	if len(os.Args) < 2 || !strings.HasSuffix(os.Args[1], ".dem") {
