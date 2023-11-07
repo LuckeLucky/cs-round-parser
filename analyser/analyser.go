@@ -26,9 +26,6 @@ type Analyser struct {
 	//Current ScoreBoard scores
 	ctScore int
 	tScore  int
-	//half scores
-	halfCtScore int
-	halfTScore  int
 
 	//Convars -----------------
 	maxRounds         int

@@ -85,12 +85,10 @@ func (analyser *Analyser) handleRoundEnd(e events.RoundEnd) {
 	}
 	switch e.Winner {
 	case common.TeamCounterTerrorists:
-		analyser.halfCtScore++
 		analyser.ctScore = winnerScore
 		analyser.tScore = loserScore
 		analyser.currentRound.winner = common.TeamCounterTerrorists
 	case common.TeamTerrorists:
-		analyser.halfTScore++
 		analyser.tScore = winnerScore
 		analyser.ctScore = loserScore
 		analyser.currentRound.winner = common.TeamTerrorists
@@ -113,13 +111,11 @@ func (analyser *Analyser) handleRoundEndOfficial(e events.RoundEndOfficial) {
 		//at this point if RoundEnd was dispatched RondEndOfficial will not be processed because roundStarted is false
 		//Ct won the round
 		if analyser.parser.GameState().TeamCounterTerrorists().Score() > analyser.ctScore {
-			analyser.halfCtScore++
 			analyser.ctScore = analyser.parser.GameState().TeamCounterTerrorists().Score()
 			analyser.tScore = analyser.parser.GameState().TeamTerrorists().Score()
 			analyser.currentRound.winner = common.TeamCounterTerrorists
 			//t won the round
 		} else if analyser.parser.GameState().TeamTerrorists().Score() > analyser.tScore {
-			analyser.halfTScore++
 			analyser.tScore = analyser.parser.GameState().TeamTerrorists().Score()
 			analyser.ctScore = analyser.parser.GameState().TeamCounterTerrorists().Score()
 			analyser.currentRound.winner = common.TeamTerrorists

@@ -74,7 +74,6 @@ func (analyser *Analyser) checkForMatchHalfOrEnd() {
 			analyser.setMatchEnded()
 			analyser.printFinish()
 		} else {
-			analyser.resetHalfScores()
 			analyser.printHalf()
 		}
 	}

@@ -9,11 +9,6 @@ func (analyser *Analyser) setDefault() {
 	analyser.players = make(map[string]map[uint64]string)
 }
 
-func (analyser *Analyser) resetHalfScores() {
-	analyser.halfCtScore = 0
-	analyser.halfTScore = 0
-}
-
 func (analyser *Analyser) switchSideScores() {
 	analyser.ctScore, analyser.tScore = analyser.tScore, analyser.ctScore
 }
