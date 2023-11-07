@@ -1,30 +1,5 @@
 package analyser
 
-func (analyser *Analyser) setRoundEnd(tick int) {
-	analyser.roundStarted = false
-	analyser.currentRound.endTick = tick
-	analyser.setRoundFinish()
-}
-
-func (analyser *Analyser) setRoundEndOfficial(tick int) {
-	analyser.roundStarted = false
-	analyser.currentRound.endOfficialTick = tick
-	analyser.setRoundFinish()
-}
-
-func (analyser *Analyser) setMatchEnded() {
-	analyser.matchEnded = true
-}
-
-func (analyser *Analyser) setRoundFinish() {
-	analyser.currentRound.ctScore = analyser.ctScore
-	analyser.currentRound.tScore = analyser.tScore
-	analyser.rounds = append(analyser.rounds, analyser.currentRound)
-	analyser.roundsPlayed++
-	analyser.previousRound = analyser.currentRound
-	analyser.currentRound = nil
-}
-
 func (analyser *Analyser) setParticipants() {
 	for _, participant := range analyser.parser.GameState().Participants().AllByUserID() {
 		//1 corresponds to team Spectators

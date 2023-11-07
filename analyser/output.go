@@ -15,28 +15,6 @@ func (analyser *Analyser) printMap() {
 	}
 }
 
-func (analyser *Analyser) printFinish() {
-	fmt.Println("---Finish---")
-}
-
-func (analyser *Analyser) printHalf() {
-	fmt.Println("---HALF---")
-}
-
-func (analyser *Analyser) printRoundsPlayed() {
-	fmt.Printf("Rounds played:%d\n", analyser.roundsPlayed)
-}
-
-func (analyser *Analyser) printScore() {
-	ctName := analyser.getTeamName(analyser.parser.GameState().TeamCounterTerrorists())
-	tName := analyser.getTeamName(analyser.parser.GameState().TeamTerrorists())
-	if utils.IsWindows() {
-		fmt.Fprintf(color.Output, "%s vs %s  %d : %d\n", color.BlueString(ctName), color.RedString(tName), analyser.ctScore, analyser.tScore)
-	} else {
-		fmt.Printf("%s vs %s  %d : %d\n", color.BlueString(ctName), color.RedString(tName), analyser.ctScore, analyser.tScore)
-	}
-}
-
 func printParticipant(steamID uint64, name string) {
 	fmt.Printf("https://steamcommunity.com/profiles/%d (%s)\n", steamID, name)
 }

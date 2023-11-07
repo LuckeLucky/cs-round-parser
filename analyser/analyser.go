@@ -11,26 +11,7 @@ import (
 type Analyser struct {
 	parser    demoinfocs.Parser
 	isSource2 bool
-
-	cfg     demoinfocs.ParserConfig
-	mapName string
-
-	rounds        []*Round
-	currentRound  *Round
-	previousRound *Round
-	roundsPlayed  int
-
-	roundStarted bool
-	matchEnded   bool
-
-	//Current ScoreBoard scores
-	ctScore int
-	tScore  int
-
-	//Convars -----------------
-	maxRounds         int
-	overtimeMaxRounds int
-	freeArmor         int
+	mapName   string
 
 	//Demo participants
 	spectators map[uint64]string
@@ -39,11 +20,8 @@ type Analyser struct {
 
 func NewAnalyser(demostream io.Reader) *Analyser {
 	analyser := &Analyser{}
-	analyser.cfg = demoinfocs.DefaultParserConfig
-
-	parser := demoinfocs.NewParserWithConfig(demostream, analyser.cfg)
+	parser := demoinfocs.NewParserWithConfig(demostream, demoinfocs.DefaultParserConfig)
 	analyser.parser = parser
-
 	return analyser
 
 }
@@ -70,7 +48,6 @@ func (analyser *Analyser) FirstParse() {
 	}
 
 	analyser.printMap()
-	analyser.printRoundsPlayed()
 	analyser.printPlayers()
 	analyser.printSpectators()
 }
