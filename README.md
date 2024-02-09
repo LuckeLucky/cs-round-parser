@@ -1,3 +1,9 @@
+# cs-round-parser
+Output round by round score of a counterstrike match, along with the details of the participants and spectators.
+
+# Example Output
+![image](https://github.com/LuckeLucky/cs-round-parser/assets/43279191/f7de0c7e-07f1-46dc-b915-69bf85eb3818)
+
 # Build
 
 Build parser
