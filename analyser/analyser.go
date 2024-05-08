@@ -35,17 +35,19 @@ type Analyser struct {
 	//Demo participants
 	spectators map[uint64]string
 	players    map[string](map[uint64]string)
+
+	isSimpleReader bool
 }
 
-func NewAnalyser(demostream io.Reader) *Analyser {
+func NewAnalyser(demostream io.Reader, isSimpleReader bool) *Analyser {
 	analyser := &Analyser{}
 	analyser.cfg = demoinfocs.DefaultParserConfig
 
 	parser := demoinfocs.NewParserWithConfig(demostream, analyser.cfg)
 	analyser.parser = parser
+	analyser.isSimpleReader = isSimpleReader
 
 	return analyser
-
 }
 
 func (analyser *Analyser) handleHeader() {
@@ -70,7 +72,9 @@ func (analyser *Analyser) FirstParse() {
 	}
 
 	analyser.printMap()
-	analyser.printRoundsPlayed()
+	if !analyser.isSimpleReader {
+		analyser.printRoundsPlayed()
+	}
 	analyser.printPlayers()
 	analyser.printSpectators()
 }

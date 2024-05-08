@@ -10,6 +10,12 @@ import (
 	"github.com/LuckeLucky/cs-round-parser/utils"
 )
 
+var readerType string
+
+func isSimpleReader() bool {
+	return readerType == "simple"
+}
+
 func main() {
 	if len(os.Args) < 2 || !strings.HasSuffix(os.Args[1], ".dem") {
 		readMultipleDemos()
@@ -39,7 +45,7 @@ func readMultipleDemos() {
 			defer f.Close()
 
 			fmt.Printf("Analyzing file: %s\n", f.Name())
-			an := analyser.NewAnalyser(f)
+			an := analyser.NewAnalyser(f, isSimpleReader())
 			an.FirstParse()
 			fmt.Printf("Finished file: %s\n\n", f.Name())
 			f.Close()
@@ -57,7 +63,7 @@ func readSingleDemo() {
 	defer f.Close()
 
 	fmt.Printf("Analyzing file: %s\n", f.Name())
-	an := analyser.NewAnalyser(f)
+	an := analyser.NewAnalyser(f, isSimpleReader())
 	an.FirstParse()
 	fmt.Printf("Finished file: %s\n\n", f.Name())
 	f.Close()

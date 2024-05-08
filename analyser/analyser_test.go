@@ -16,7 +16,7 @@ func newAnalyserByPath(path string) *Analyser {
 	}
 	defer f.Close()
 
-	an := NewAnalyser(f)
+	an := NewAnalyser(f, false)
 	an.FirstParse()
 	f.Close()
 

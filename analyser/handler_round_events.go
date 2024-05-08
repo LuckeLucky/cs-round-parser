@@ -15,6 +15,10 @@ type Round struct {
 }
 
 func (analyser *Analyser) registerMatchEventHandlers() {
+	if analyser.isSimpleReader {
+		analyser.parser.RegisterEventHandler(func(e events.RoundEnd) { analyser.handleRoundEndSimple(e) })
+		return
+	}
 	//Round start
 	analyser.parser.RegisterEventHandler(func(e events.RoundStart) { analyser.handlerRoundStart(e) })
 	analyser.parser.RegisterEventHandler(func(e events.MatchStartedChanged) { analyser.handlerRoundStart(e) })
@@ -25,6 +29,28 @@ func (analyser *Analyser) registerMatchEventHandlers() {
 
 	//Handle side switch
 	analyser.parser.RegisterEventHandler(func(e events.TeamSideSwitch) { analyser.handleSideSwitch() })
+}
+
+func (analyser *Analyser) handleRoundEndSimple(e events.RoundEnd) {
+	_, err := analyser.getGameTick()
+	if err {
+		return
+	}
+	winnerScore := e.WinnerState.Score()
+	loserScore := e.LoserState.Score()
+	if !analyser.isSource2 {
+		winnerScore = winnerScore + 1
+	}
+	switch e.Winner {
+	case common.TeamCounterTerrorists:
+		analyser.ctScore = winnerScore
+		analyser.tScore = loserScore
+	case common.TeamTerrorists:
+		analyser.ctScore = loserScore
+		analyser.tScore = winnerScore
+	}
+	analyser.printScore()
+	analyser.setParticipants()
 }
 
 func (analyser *Analyser) handlerRoundStart(e interface{}) {

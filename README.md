@@ -9,6 +9,7 @@ Output round by round score of a counterstrike match, along with the details of 
 Build parser
 ```sh
     go build
+    go build -ldflags "-X main.readerType=simple" -o cs-round-simple-parser
 ```
 
 # Usage
