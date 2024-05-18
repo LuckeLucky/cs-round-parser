@@ -5,25 +5,27 @@ on:
       - '*'
 
 jobs:
-  create_release:
+  build_project:
+    name: Build Project Executables
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Set up Go
+      - name: Set up golang
         uses: actions/setup-go@v5
         with:
           go-version: '1.21'
-
       - name: Build simple parser
-        run: go build -ldflags "-X main.readerType=simple" -o cs-round-simple-parser
-
+        run: go build -ldflags "-X main.readerType=simple" -o cs-round-parser-simple.exe
       - name: Build
         run: go build
 
+  create_release:
+    runs-on: ubuntu-latest
+    needs: build_project
+    steps:
       - name: Create Release
-        id: create_release
+        id: create_new_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -32,12 +34,12 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-      - name: Upload executables
+      - name: Upload simple parser executable
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.create_new_release.outputs.upload_url }}
           asset_path: ./cs-round-parser.exe
           asset_name: cs-round-parser.exe
           asset_content_type: application/octet-stream
