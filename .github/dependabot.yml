@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: gomod
     directory: /
     schedule:
-      interval: weekly
+      interval: daily
     ignore:
       - dependency-name: github.com/stretchr/testify
         versions:
