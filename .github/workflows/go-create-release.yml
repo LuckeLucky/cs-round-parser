@@ -18,17 +18,7 @@ jobs:
       - name: Build simple parser
         run: go build -ldflags "-X main.readerType=simple" -o cs-round-parser-simple.exe
       - name: Build
-        run: go build
-      - name: Upload simple parser
-        uses: actions/upload-artifact@v4
-        with:
-          name: cs-round-parser-simple.exe
-          path: cs-round-parser-simple.exe
-      - name: Upload parser
-        uses: actions/upload-artifact@v4
-        with:
-          name: cs-round-parser.exe
-          path: cs-round-parser.exe
+        run: go build -o cs-round-parser.exe
 
   create_release:
     runs-on: ubuntu-latest
