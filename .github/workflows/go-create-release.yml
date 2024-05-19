@@ -18,10 +18,12 @@ jobs:
           go-version: '1.21'
 
       - name: Build simple parser
-        run: go build -ldflags "-X main.readerType=simple" -o cs-round-parser-simple.exe
+        run: |
+          GOOS=windows GOARCH=amd64 go build -ldflags "-X main.readerType=simple" -o cs-round-parser-simple.exe
 
       - name: Build default parser
-        run: go build -o cs-round-parser.exe
+        run: |
+          GOOS=windows GOARCH=amd64 go build -o cs-round-parser.exe
 
       - name: Create Release
         id: create_new_release
