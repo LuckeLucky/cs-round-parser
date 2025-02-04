@@ -6,7 +6,7 @@ toolchain go1.21.1
 
 require (
 	github.com/fatih/color v1.15.0
-	github.com/markus-wa/demoinfocs-golang/v4 v4.3.2
+	github.com/markus-wa/demoinfocs-golang/v4 v4.3.3
 	github.com/stretchr/testify v1.10.0
 )
 
