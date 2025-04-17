@@ -5,12 +5,11 @@ import (
 
 	"github.com/LuckeLucky/cs-round-parser/utils"
 
-	demoinfocs "github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs"
+	demoinfocs "github.com/markus-wa/demoinfocs-golang/v5/pkg/demoinfocs"
 )
 
 type Analyser struct {
-	parser    demoinfocs.Parser
-	isSource2 bool
+	parser demoinfocs.Parser
 
 	cfg     demoinfocs.ParserConfig
 	mapName string
@@ -50,16 +49,8 @@ func NewAnalyser(demostream io.Reader, isSimpleReader bool) *Analyser {
 	return analyser
 }
 
-func (analyser *Analyser) handleHeader() {
-	header, err := analyser.parser.ParseHeader()
-	utils.CheckError(err)
-	analyser.mapName = header.MapName
-	analyser.isSource2 = header.Filestamp == "PBDEMS2"
-}
-
 // Used to gather information about RoundStart..End and team scores
 func (analyser *Analyser) FirstParse() {
-	analyser.handleHeader()
 	analyser.setDefault()
 
 	analyser.registerNetMessageHandlers()

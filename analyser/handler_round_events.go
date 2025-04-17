@@ -1,8 +1,8 @@
 package analyser
 
 import (
-	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/common"
-	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/events"
+	"github.com/markus-wa/demoinfocs-golang/v5/pkg/demoinfocs/common"
+	"github.com/markus-wa/demoinfocs-golang/v5/pkg/demoinfocs/events"
 )
 
 type Round struct {
@@ -38,9 +38,6 @@ func (analyser *Analyser) handleRoundEndSimple(e events.RoundEnd) {
 	}
 	winnerScore := e.WinnerState.Score()
 	loserScore := e.LoserState.Score()
-	if !analyser.isSource2 {
-		winnerScore = winnerScore + 1
-	}
 	switch e.Winner {
 	case common.TeamCounterTerrorists:
 		analyser.ctScore = winnerScore
@@ -106,9 +103,6 @@ func (analyser *Analyser) handleRoundEnd(e events.RoundEnd) {
 	//Score not updated in source
 	winnerScore := e.WinnerState.Score()
 	loserScore := e.LoserState.Score()
-	if !analyser.isSource2 {
-		winnerScore = winnerScore + 1
-	}
 	switch e.Winner {
 	case common.TeamCounterTerrorists:
 		analyser.ctScore = winnerScore
