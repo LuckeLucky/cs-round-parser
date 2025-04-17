@@ -3,7 +3,7 @@ package analyser
 import (
 	"strconv"
 
-	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/common"
+	"github.com/markus-wa/demoinfocs-golang/v5/pkg/demoinfocs/common"
 )
 
 func (analyser *Analyser) getGameTick() (int, bool) {

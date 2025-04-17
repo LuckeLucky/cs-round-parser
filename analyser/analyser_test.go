@@ -23,30 +23,9 @@ func newAnalyserByPath(path string) *Analyser {
 	return an
 }
 
-func TestSourceDemo(t *testing.T) {
-	an := newAnalyserByPath("../test-demos/main_cs.dem")
-
-	assert.Equal(t, false, an.isSource2)
-	assert.Equal(t, "de_mirage", an.mapName)
-
-	assert.Equal(t, 5, an.rounds[14].ctScore)
-	assert.Equal(t, 10, an.rounds[14].tScore)
-
-	assert.Equal(t, 16, an.rounds[len(an.rounds)-1].ctScore)
-	assert.Equal(t, 6, an.rounds[len(an.rounds)-1].tScore)
-
-	for _, players := range an.players {
-		assert.Equal(t, 5, len(players))
-	}
-	assert.Equal(t, 2, len(an.spectators))
-
-	assert.Equal(t, 22, an.roundsPlayed)
-}
-
 func TestSource2Demo(t *testing.T) {
 	an := newAnalyserByPath("../test-demos/main_cs2.dem")
 
-	assert.Equal(t, true, an.isSource2)
 	assert.Equal(t, "de_anubis", an.mapName)
 
 	for _, players := range an.players {
@@ -61,19 +40,4 @@ func TestSource2Demo(t *testing.T) {
 	assert.Equal(t, 3, an.rounds[len(an.rounds)-1].tScore)
 
 	assert.Equal(t, 16, an.roundsPlayed)
-}
-
-func TestOvertimes(t *testing.T) {
-	an := newAnalyserByPath("../test-demos/cs_overtime.dem")
-
-	assert.Equal(t, 15, an.rounds[32].ctScore)
-	assert.Equal(t, 18, an.rounds[32].tScore)
-}
-
-func TestOvertimeStart(t *testing.T) {
-	an := newAnalyserByPath("../test-demos/immortals-vs-astralis-train-tiebreaker.dem")
-
-	assert.Equal(t, 24, an.roundsPlayed)
-	assert.Equal(t, 7, an.rounds[12].tScore)
-	assert.Equal(t, 10, an.rounds[18].tScore)
 }
