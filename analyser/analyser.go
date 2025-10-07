@@ -3,8 +3,6 @@ package analyser
 import (
 	"io"
 
-	"github.com/LuckeLucky/cs-round-parser/utils"
-
 	demoinfocs "github.com/markus-wa/demoinfocs-golang/v5/pkg/demoinfocs"
 )
 
@@ -59,7 +57,7 @@ func (analyser *Analyser) FirstParse() {
 	// Parse to end
 	err := analyser.parser.ParseToEnd()
 	if err != demoinfocs.ErrUnexpectedEndOfDemo {
-		utils.CheckError(err)
+		analyser.printEndOfParsing()
 	}
 
 	analyser.printMap()

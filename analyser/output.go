@@ -58,3 +58,7 @@ func (analyser *Analyser) printPlayers() {
 		}
 	}
 }
+
+func (analyser *Analyser) printEndOfParsing() {
+	fmt.Println("--Demo ended, might be incomplete--")
+}
