@@ -1,12 +1,10 @@
 module github.com/LuckeLucky/cs-round-parser
 
-go 1.23.0
-
-toolchain go1.23.8
+go 1.24
 
 require (
 	github.com/fatih/color v1.18.0
-	github.com/markus-wa/demoinfocs-golang/v5 v5.0.0-alpha.0
+	github.com/markus-wa/demoinfocs-golang/v5 v5.0.2
 	github.com/stretchr/testify v1.10.0
 )
 
