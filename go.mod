@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/fatih/color v1.18.0
-	github.com/markus-wa/demoinfocs-golang/v5 v5.1.2
+	github.com/markus-wa/demoinfocs-golang/v5 v5.1.3
 	github.com/stretchr/testify v1.10.0
 )
 
