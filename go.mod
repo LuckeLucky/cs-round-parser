@@ -4,8 +4,8 @@ go 1.24.0
 
 require (
 	github.com/fatih/color v1.18.0
-	github.com/markus-wa/demoinfocs-golang/v5 v5.1.2
-	github.com/stretchr/testify v1.10.0
+	github.com/markus-wa/demoinfocs-golang/v5 v5.1.4
+	github.com/stretchr/testify v1.11.1
 )
 
 require (
@@ -18,11 +18,11 @@ require (
 	github.com/markus-wa/quickhull-go/v2 v2.2.0 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
-	github.com/oklog/ulid/v2 v2.1.0 // indirect
+	github.com/oklog/ulid/v2 v2.1.1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	golang.org/x/exp v0.0.0-20250408133849-7e4ce0ab07d0 // indirect
 	golang.org/x/sys v0.32.0 // indirect
-	google.golang.org/protobuf v1.36.6 // indirect
+	google.golang.org/protobuf v1.36.11 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
